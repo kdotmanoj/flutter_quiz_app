@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-// quiz_screen.dart
-=======
->>>>>>> origin/master
 import 'package:flutter/material.dart';
 import '../services/api_service.dart';
 import '../models/question.dart';
@@ -9,6 +5,7 @@ import 'result_screen.dart';
 
 class QuizScreen extends StatefulWidget {
   final String difficulty;
+
   QuizScreen({required this.difficulty});
 
   @override
@@ -23,11 +20,6 @@ class _QuizScreenState extends State<QuizScreen> {
   String? _selectedAnswer;
   String? _selectedExplanation;
   bool _showExplanation = false;
-<<<<<<< HEAD
-  bool _answerSubmitted = false;
-  bool _isCorrect = false;
-=======
->>>>>>> origin/master
 
   @override
   void initState() {
@@ -35,19 +27,6 @@ class _QuizScreenState extends State<QuizScreen> {
     _questionsFuture = ApiService.getQuestions(widget.difficulty);
   }
 
-<<<<<<< HEAD
-  void _handleOptionTap(String answer, String correctAnswer, String explanation) {
-    if (_answerSubmitted) return;
-
-    setState(() {
-      _selectedAnswer = answer;
-      _isCorrect = answer == correctAnswer;
-      _selectedExplanation = explanation;
-    });
-  }
-
-
-=======
   void _handleOptionTap(String answer) {
     setState(() {
       _selectedAnswer = answer;
@@ -55,27 +34,16 @@ class _QuizScreenState extends State<QuizScreen> {
     });
   }
 
->>>>>>> origin/master
   void _submitAnswer() {
     if (_selectedAnswer == null) return; // No answer selected
 
     final currentQuestion = _questions[_currentIndex];
     setState(() {
-<<<<<<< HEAD
-      _showExplanation = true;
-      _answerSubmitted = true;
-      _selectedExplanation = currentQuestion.explanation;
-      _isCorrect = _selectedAnswer == currentQuestion.correctAnswer;
-      if (_isCorrect) {
-        _score += 100; // 100 points for a correct answer
-      }
-=======
       if (_selectedAnswer == currentQuestion.correctAnswer) {
         _score += 100; // 100 points for a correct answer
       }
       _selectedExplanation = currentQuestion.explanation;
       _showExplanation = true;
->>>>>>> origin/master
     });
   }
 
@@ -86,14 +54,8 @@ class _QuizScreenState extends State<QuizScreen> {
         _selectedAnswer = null;
         _selectedExplanation = null;
         _showExplanation = false;
-<<<<<<< HEAD
-        _answerSubmitted = false; // Reset answer submission state
       } else {
         Navigator.pushReplacement(
-=======
-      } else {
-        Navigator.push(
->>>>>>> origin/master
           context,
           MaterialPageRoute(
             builder: (context) => ResultScreen(score: _score),
@@ -124,9 +86,7 @@ class _QuizScreenState extends State<QuizScreen> {
             return Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-<<<<<<< HEAD
                   // Progress Bar
                   LinearProgressIndicator(
                     value: (_currentIndex + 1) / _questions.length,
@@ -134,118 +94,90 @@ class _QuizScreenState extends State<QuizScreen> {
                     color: Colors.blue,
                   ),
                   SizedBox(height: 16.0),
-=======
->>>>>>> origin/master
+
+                  // Question Text
                   Text(
                     currentQuestion.text,
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                   SizedBox(height: 16.0),
-<<<<<<< HEAD
+
+                  // Options
                   Expanded(
-                    child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          ...currentQuestion.options.map((option) {
-                            bool isSelected = _selectedAnswer == option;
-                            return Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 4.0),
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  if (!_answerSubmitted) {
-                                    _handleOptionTap(
-                                      option,
-                                      currentQuestion.correctAnswer,
-                                      currentQuestion.explanation,
-                                    );
-                                  }
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: isSelected ? Colors.blue : Colors.grey,
-                                ),
-                                child: Text(option),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ...currentQuestion.options.map((option) {
+                          bool isSelected = _selectedAnswer == option;
+                          return Container(
+                            width: double.infinity,
+                            margin: const EdgeInsets.symmetric(vertical: 4.0),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                if (!_showExplanation) {
+                                  _handleOptionTap(option);
+                                }
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: isSelected ? Colors.blue : Colors.grey,
                               ),
-                            );
-                          }).toList(),
-                        ],
-                      ),
+                              child: Text(option),
+                            ),
+                          );
+                        }).toList(),
+                      ],
                     ),
                   ),
-                  if (!_answerSubmitted)
-                    ElevatedButton(
-                      onPressed: _submitAnswer,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue,
-                      ),
-                      child: Text('Submit Answer'),
-                    ),
-=======
-                  ...currentQuestion.options.map((option) {
-                    bool isSelected = _selectedAnswer == option;
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 4.0),
-                      child: ElevatedButton(
-                        onPressed: () {
-                          _handleOptionTap(option);
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: isSelected ? Colors.blue : Colors.grey,
-                        ),
-                        child: Text(option),
-                      ),
-                    );
-                  }).toList(),
-                  SizedBox(height: 16.0),
-                  ElevatedButton(
-                    onPressed: _submitAnswer,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue, // Use backgroundColor instead of primary
-                    ),
-                    child: Text('Submit Answer'),
-                  ),
->>>>>>> origin/master
+                  Spacer(), // Pushes the following content to the bottom
+
+                  // Explanation and Feedback
                   if (_showExplanation)
-                    Padding(
-                      padding: const EdgeInsets.only(top: 16.0),
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.only(bottom: 16.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-<<<<<<< HEAD
                           Text(
-                            _isCorrect ? 'Correct!' : 'Incorrect!',
+                            _selectedAnswer == currentQuestion.correctAnswer ? 'Correct!' : 'Incorrect!',
                             style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                              color: _isCorrect ? Colors.green : Colors.red,
+                              color: _selectedAnswer == currentQuestion.correctAnswer ? Colors.green : Colors.red,
                             ),
                           ),
                           SizedBox(height: 8.0),
-=======
->>>>>>> origin/master
                           Text('Explanation:', style: Theme.of(context).textTheme.titleMedium),
                           SizedBox(height: 8.0),
                           Text(_selectedExplanation ?? 'No explanation available.'),
                         ],
                       ),
                     ),
-                  SizedBox(height: 16.0),
-<<<<<<< HEAD
-                  if (_answerSubmitted || _showExplanation)
-                    ElevatedButton(
-                      onPressed: _nextQuestion,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue,
-                      ),
-                      child: Text(_currentIndex < _questions.length - 1 ? 'Next Question' : 'Finish Quiz'),
-                    ),
-=======
-                  ElevatedButton(
-                    onPressed: _nextQuestion,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue, // Use backgroundColor instead of primary
-                    ),
-                    child: Text(_currentIndex < _questions.length - 1 ? 'Next Question' : 'Finish Quiz'),
+
+                  // Submit and Next Buttons
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      if (!_showExplanation)
+                        Expanded(
+                          child: ElevatedButton(
+                            onPressed: _submitAnswer,
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.blue,
+                            ),
+                            child: Text('Submit Answer'),
+                          ),
+                        ),
+                      if (_showExplanation)
+                        Expanded(
+                          child: ElevatedButton(
+                            onPressed: _nextQuestion,
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.blue,
+                            ),
+                            child: Text(_currentIndex < _questions.length - 1 ? 'Next Question' : 'Finish Quiz'),
+                          ),
+                        ),
+                    ],
                   ),
->>>>>>> origin/master
                 ],
               ),
             );

@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'screens/home_screen.dart';
-<<<<<<< HEAD
 import 'screens/quiz_screen.dart';
 import 'screens/result_screen.dart';
-=======
->>>>>>> origin/master
 
 void main() {
   runApp(MyApp());
@@ -17,23 +14,50 @@ class MyApp extends StatelessWidget {
       title: 'Quiz App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        textTheme: TextTheme(
+          displayLarge: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.black),
+          bodyLarge: TextStyle(fontSize: 18, color: Colors.black87),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            textStyle: TextStyle(fontSize: 20),
+            padding: EdgeInsets.symmetric(vertical: 12, horizontal: 24),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+          ),
+        ),
       ),
-<<<<<<< HEAD
       initialRoute: '/home',
       routes: {
         '/home': (context) => HomeScreen(),
         '/quiz': (context) {
-          final difficulty = ModalRoute.of(context)!.settings.arguments as String;
-          return QuizScreen(difficulty: difficulty);
+          final args = ModalRoute.of(context)!.settings.arguments;
+          if (args is String) {
+            return QuizScreen(difficulty: args);
+          }
+          return ErrorScreen(); // Handle potential error
         },
         '/result': (context) {
-          final score = ModalRoute.of(context)!.settings.arguments as int;
-          return ResultScreen(score: score);
+          final args = ModalRoute.of(context)!.settings.arguments;
+          if (args is int) {
+            return ResultScreen(score: args);
+          }
+          return ErrorScreen(); // Handle potential error
         },
       },
-=======
-      home: HomeScreen(),
->>>>>>> origin/master
+    );
+  }
+}
+
+class ErrorScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Text('An error occurred! Please try again.'),
+      ),
     );
   }
 }
