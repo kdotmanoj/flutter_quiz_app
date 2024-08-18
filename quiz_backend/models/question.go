@@ -1,8 +1,8 @@
 package models
 
 type Question struct {
-	ID       int      `json:"id"`
-	Question string   `json:"question"`
-	Options  []string `json:"options"`
-	Answer   string   `json:"answer"`
+	Text          string   `json:"text"`
+	Options       []string `json:"options"`
+	CorrectAnswer string   `json:"correctAnswer"`
+	Explanation   string   `json:"explanation"`
 }

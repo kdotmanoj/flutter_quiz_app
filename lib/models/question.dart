@@ -1,19 +1,33 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:flutter/material.dart';
 
-part 'question.g.dart';
-
-@JsonSerializable()
 class Question {
-  final String question;
+  final String text;
   final List<String> options;
-  final String? hint; // Make hint nullable
+  final String correctAnswer;
+  final String explanation;
 
   Question({
-    required this.question,
+    required this.text,
     required this.options,
-    this.hint, // Initialize hint as nullable
+    required this.correctAnswer,
+    required this.explanation,
   });
 
-  factory Question.fromJson(Map<String, dynamic> json) => _$QuestionFromJson(json);
-  Map<String, dynamic> toJson() => _$QuestionToJson(this);
+  factory Question.fromJson(Map<String, dynamic> json) {
+    return Question(
+      text: json['question'] ?? 'No question available',
+      options: List<String>.from(json['options'] ?? []),
+      correctAnswer: json['answer'] ?? 'No correct answer',
+      explanation: json['explanation'] ?? 'No explanation available',
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'question': text,
+      'options': options,
+      'answer': correctAnswer,
+      'explanation': explanation,
+    };
+  }
 }
