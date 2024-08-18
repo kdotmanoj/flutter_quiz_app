@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'screens/home_screen.dart';
+<<<<<<< HEAD
 import 'screens/quiz_screen.dart';
 import 'screens/result_screen.dart';
+=======
+>>>>>>> origin/master
 
 void main() {
   runApp(MyApp());
@@ -15,6 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+<<<<<<< HEAD
       initialRoute: '/home',
       routes: {
         '/home': (context) => HomeScreen(),
@@ -27,6 +31,9 @@ class MyApp extends StatelessWidget {
           return ResultScreen(score: score);
         },
       },
+=======
+      home: HomeScreen(),
+>>>>>>> origin/master
     );
   }
 }

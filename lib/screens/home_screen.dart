@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'quiz_screen.dart';
+<<<<<<< HEAD
+=======
+import '../services/api_service.dart';
+>>>>>>> origin/master
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -17,6 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+<<<<<<< HEAD
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final score = ModalRoute.of(context)?.settings.arguments as int?;
       if (score != null) {
@@ -26,6 +31,19 @@ class _HomeScreenState extends State<HomeScreen> {
         });
       }
     });
+=======
+    // Removing the _loadUserData() method since user data is no longer needed
+    // _loadUserData();
+  }
+
+  // Remove the _loadUserData() method since it's no longer used
+
+  void _startQuiz(String difficulty) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => QuizScreen(difficulty: difficulty)),
+    );
+>>>>>>> origin/master
   }
 
   @override
@@ -52,6 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+<<<<<<< HEAD
   void _startQuiz(String difficulty) async {
     final score = await Navigator.pushNamed(
       context,
@@ -78,6 +97,8 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+=======
+>>>>>>> origin/master
   Widget _buildDifficultyButton(String difficulty, {bool isLocked = false}) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 16.0),

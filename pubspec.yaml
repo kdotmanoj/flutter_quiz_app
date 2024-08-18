@@ -42,7 +42,10 @@ dev_dependencies:
     sdk: flutter
   build_runner: ^2.4.12
   json_serializable: ^6.8.0
+<<<<<<< HEAD
   shared_preferences: ^2.0.12
+=======
+>>>>>>> origin/master
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
