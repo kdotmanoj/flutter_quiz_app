@@ -87,6 +87,13 @@ class _QuizScreenState extends State<QuizScreen> {
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 children: [
+                  // Question Counter
+                  Text(
+                    'Question ${_currentIndex + 1}/${_questions.length}',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                  SizedBox(height: 16.0),
+
                   // Progress Bar
                   LinearProgressIndicator(
                     value: (_currentIndex + 1) / _questions.length,
@@ -128,7 +135,9 @@ class _QuizScreenState extends State<QuizScreen> {
                       ],
                     ),
                   ),
-                  Spacer(), // Pushes the following content to the bottom
+
+                  // Spacer to push buttons to the bottom
+                  Spacer(),
 
                   // Explanation and Feedback
                   if (_showExplanation)
