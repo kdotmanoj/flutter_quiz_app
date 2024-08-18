@@ -15,17 +15,15 @@ class _HomeScreenState extends State<HomeScreen> {
   };
 
   @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final score = ModalRoute.of(context)?.settings.arguments as int?;
-      if (score != null) {
-        setState(() {
-          totalPoints += score;
-          _unlockLevels();
-        });
-      }
-    });
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final int? score = ModalRoute.of(context)?.settings.arguments as int?;
+    if (score != null) {
+      setState(() {
+        totalPoints += score; // Update the total score
+        _unlockLevels();
+      });
+    }
   }
 
   void _startQuiz(String difficulty) async {
@@ -35,8 +33,6 @@ class _HomeScreenState extends State<HomeScreen> {
         builder: (context) => QuizScreen(difficulty: difficulty),
       ),
     );
-
-    print('Returned score: $score');
 
     if (score != null) {
       setState(() {

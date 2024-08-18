@@ -23,10 +23,10 @@ class ResultScreen extends StatelessWidget {
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => HomeScreen()),
-                      (route) => false,
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                  '/home',
+                      (Route<dynamic> route) => false,
+                  arguments: score, // Pass the score to HomeScreen
                 );
               },
               child: Text('Return to Home'),
