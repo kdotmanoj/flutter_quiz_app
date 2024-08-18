@@ -1,0 +1,38 @@
+package database
+
+import (
+	"database/sql"
+	"log"
+	_ "github.com/mattn/go-sqlite3"
+)
+
+var DB *sql.DB
+
+func InitDB() {
+	var err error
+	DB, err = sql.Open("sqlite3", "./quiz_app.db")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	createUserTable := `CREATE TABLE IF NOT EXISTS users (
+		id INTEGER PRIMARY KEY,
+		total_points INTEGER,
+		unlocked_levels TEXT
+	);`
+	_, err = DB.Exec(createUserTable)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	createQuestionsTable := `CREATE TABLE IF NOT EXISTS questions (
+		id INTEGER PRIMARY KEY,
+		text TEXT,
+		options TEXT,
+		correct_answer TEXT
+	);`
+	_, err = DB.Exec(createQuestionsTable)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
