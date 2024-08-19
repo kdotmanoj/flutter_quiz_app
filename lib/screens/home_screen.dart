@@ -20,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final int? score = ModalRoute.of(context)?.settings.arguments as int?;
     if (score != null) {
       setState(() {
-        totalPoints += score; // Update the total score
+        totalPoints += score; // Add the score from ResultScreen
         _unlockLevels();
       });
     }

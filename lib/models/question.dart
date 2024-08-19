@@ -5,12 +5,14 @@ class Question {
   final List<String> options;
   final String correctAnswer;
   final String explanation;
+  final String? imageUrl; // Optional image URL
 
   Question({
     required this.text,
     required this.options,
     required this.correctAnswer,
     required this.explanation,
+    this.imageUrl,
   });
 
   factory Question.fromJson(Map<String, dynamic> json) {
@@ -19,6 +21,7 @@ class Question {
       options: List<String>.from(json['options'] ?? []),
       correctAnswer: json['answer'] ?? 'No correct answer',
       explanation: json['explanation'] ?? 'No explanation available',
+      imageUrl: json['imageUrl'],
     );
   }
 
