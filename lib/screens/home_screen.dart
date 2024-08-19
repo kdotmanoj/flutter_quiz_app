@@ -43,10 +43,10 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _unlockLevels() {
-    if (totalPoints >= 800) {
+    if (totalPoints >= 600) {
       unlockedLevels['Medium'] = true;
     }
-    if (totalPoints >= 2000) {
+    if (totalPoints >= 800) {
       unlockedLevels['Hard'] = true;
     }
   }

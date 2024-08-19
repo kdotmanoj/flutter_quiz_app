@@ -5,7 +5,7 @@ class QuizOption extends StatelessWidget {
   final bool isSelected;
   final VoidCallback onTap;
 
-  const QuizOption({super.key, 
+  const QuizOption({super.key,
     required this.option,
     required this.isSelected,
     required this.onTap,
